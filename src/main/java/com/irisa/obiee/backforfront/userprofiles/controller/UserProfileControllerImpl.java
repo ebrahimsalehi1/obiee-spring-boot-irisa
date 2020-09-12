@@ -1,6 +1,7 @@
 package com.irisa.obiee.backforfront.userprofiles.controller;
 
 import com.irisa.obiee.backforfront.userprofiles.service.UserProfileService;
+import io.swagger.annotations.SwaggerDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
