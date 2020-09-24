@@ -1,10 +1,7 @@
-package com.irisa.obiee.backforfront.userprofiles.service;
+package com.irisa.obiee.backforfront.cache.userprofiles;
 
-
-import com.irisa.obiee.backforfront.userprofiles.model.UserProfile;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.List;
 
 public interface UserProfileService {
      int add(UserProfile userProfile);

@@ -1,13 +1,9 @@
-package com.irisa.obiee.backforfront.userprofiles.service;
+package com.irisa.obiee.backforfront.cache.userprofiles;
 
-import com.irisa.obiee.backforfront.userprofiles.model.UserProfile;
-import com.irisa.obiee.backforfront.userprofiles.repository.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserProfileServiceImpl implements UserProfileService {
