@@ -4,17 +4,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class SampleController {
 
-    @RequestMapping(value = "/getdata")
+    @RequestMapping(value = "/getdata",method = RequestMethod.GET)
     public ResponseEntity<String> getData() {
         return new ResponseEntity<>("I am Ebrahim Salehi", HttpStatus.OK);
     }
 
-    @RequestMapping(value="/gettype/{type}")
+    @RequestMapping(value="/gettype/{type}",method = RequestMethod.GET)
     public ResponseEntity<String> getType(@PathVariable Integer type){
         switch(type){
             case 1:

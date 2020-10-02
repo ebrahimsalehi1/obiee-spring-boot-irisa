@@ -1,4 +1,4 @@
-package com.irisa.obiee.backforfront.cache.userprofiles;
+package com.irisa.obiee.backforfront.cache.cachestore;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

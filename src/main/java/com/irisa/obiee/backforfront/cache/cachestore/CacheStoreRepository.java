@@ -1,4 +1,4 @@
-package com.irisa.obiee.backforfront.cache.userprofiles;
+package com.irisa.obiee.backforfront.cache.cachestore;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;

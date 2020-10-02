@@ -1,7 +1,7 @@
 package com.irisa.obiee.backforfront.cache;
 
-import com.irisa.obiee.backforfront.cache.userprofiles.CacheStore;
-import com.irisa.obiee.backforfront.cache.userprofiles.CacheStoreService;
+import com.irisa.obiee.backforfront.cache.cachestore.CacheStore;
+import com.irisa.obiee.backforfront.cache.cachestore.CacheStoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class OracleCacheMethod implements ICache {

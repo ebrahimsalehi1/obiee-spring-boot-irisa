@@ -1,4 +1,4 @@
-package com.irisa.obiee.backforfront.cache.userprofiles;
+package com.irisa.obiee.backforfront.cache.cachestore;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
