@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/obiee-bff",consumes = MediaType.APPLICATION_JSON_VALUE)
 public class ApplicationRoleController {
 
-    ApplicationRoleImpl applicationRole = new ApplicationRoleImpl();
+    ApplicationRoleServiceImpl applicationRole = new ApplicationRoleServiceImpl();
 
     @GetMapping(value="/hasAdminRole/{userName}")
     public ResponseEntity<Boolean> hasAdminRole(@PathVariable String userName){

@@ -36,6 +36,7 @@ public class SampleControllerTests {
 
     @Test
     public void doTestSample(){
+
         SampleService sampleServiceMock = Mockito.mock(SampleService.class);
         Mockito.when(sampleServiceMock.getType("1")).thenReturn("1");
 

@@ -2,7 +2,7 @@ package com.irisa.obiee.backforfront.obieeservices;
 
 import org.springframework.web.client.RestTemplate;
 
-public class ApplicationRoleImpl implements ApplicationRole {
+public class ApplicationRoleServiceImpl implements ApplicationRoleService {
     @Override
     public boolean hasAdminRole(String userName) {
         String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/ApplicationRoleMng/hasBIAdminRole/"+userName;

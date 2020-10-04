@@ -1,6 +1,6 @@
 package com.irisa.obiee.backforfront.obieeservices;
 
 
-public interface ApplicationRole {
+public interface ApplicationRoleService {
     public boolean hasAdminRole(String userName);
 }
