@@ -1,5 +1,7 @@
 package com.irisa.obiee.backforfront.obieeservices;
 
+import com.irisa.obiee.backforfront.general.GeneralService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -12,39 +14,33 @@ import java.util.Map;
 @Service
 public class LoginServiceImpl implements LoginService {
 
+
+    @Autowired
+    GeneralService generalService;
+
     @Override
     public String logInByWeblogicAdmin() {
         String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/SawSession/LogOn/";
-
-        RestTemplate restTemplate = new RestTemplate();
 
         Map<String,String> inputParameters = new HashMap<>();
         inputParameters.put("userName","weblogic");
         inputParameters.put("password","APEXadmin1234");
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<?> httpEntity = new HttpEntity<>(inputParameters,headers);
-
-        return restTemplate.exchange(url, HttpMethod.POST,httpEntity,String.class).getBody();
+        return generalService.callWebService(url,HttpMethod.POST,inputParameters);
     }
 
     @Override
     public String logInBehalf(String userName) {
-        String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/SawSession/LogOnBehalf";
 
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/SawSession/LogOnBehalf";
 
         Map<String,String> inputParameters = new HashMap<>();
         inputParameters.put("userName",userName);
         inputParameters.put("adminPassword","APEXadmin1234");
         inputParameters.put("adminUserName","weblogic");
 
-        HttpEntity httpEntity = new HttpEntity(inputParameters,httpHeaders);
+        return generalService.callWebService(url,HttpMethod.POST,inputParameters);
 
-        return restTemplate.exchange(url,HttpMethod.POST,httpEntity,String.class).getBody();
     }
 
     @Override

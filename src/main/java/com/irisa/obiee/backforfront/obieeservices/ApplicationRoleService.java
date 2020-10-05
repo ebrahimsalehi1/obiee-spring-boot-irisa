@@ -3,14 +3,16 @@ package com.irisa.obiee.backforfront.obieeservices;
 
 import org.json.JSONObject;
 
+import java.util.Map;
+
 public interface ApplicationRoleService {
-    public boolean hasAdminRole(String userName);
-    public boolean addRole(JSONObject role);
-    public boolean editRole(JSONObject role);
-    public boolean deleteRole(String roleName);
-    public JSONObject getAll();
-    public JSONObject getByCondition(JSONObject search);
-    public boolean assignUserToRole(String roleName,String userName);
-    public boolean deleteUserFromRole(String roleName,String userName);
-    public JSONObject getListOfUsersRole(String roleName);
+    public Boolean hasAdminRole(String userName);
+    public Boolean addRole(Map<String,String> role);
+    public Boolean editRole(JSONObject role);
+    public Boolean deleteRole(String roleName);
+    public String getAll();
+    public String getByCondition(JSONObject search);
+    public Boolean assignUserToRole(String roleName,String userName);
+    public Boolean deleteUserFromRole(String roleName,String userName);
+    public String getListOfUsersRole(String roleName);
 }
