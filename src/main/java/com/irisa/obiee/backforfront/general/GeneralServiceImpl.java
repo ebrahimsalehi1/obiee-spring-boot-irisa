@@ -28,7 +28,8 @@ public class GeneralServiceImpl implements GeneralService {
 //
 //    }
 
-    public String callWebService(String url, HttpMethod httpMethod, Map<String,String> inputParameters) {
+
+    public String callWebService(String url, HttpMethod httpMethod, Map<String,Object> inputParameters) {
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -38,7 +39,7 @@ public class GeneralServiceImpl implements GeneralService {
         return restTemplate.exchange(url, httpMethod,httpEntity,String.class).getBody();
     }
 
-    public String callChashableService(String url,Map<String,String> info) {
+    public String callChashableService(String url,HttpMethod httpMethod,Map<String,Object> info) {
         String result = null;
 
         if(isCacheEnable){
@@ -46,13 +47,13 @@ public class GeneralServiceImpl implements GeneralService {
             if(cacheStoreService.isExist(url))
                 result = cacheStoreService.getByKey(url);
             else{
-                result = callWebService(url,HttpMethod.GET,info);
+                result = callWebService(url,httpMethod,info);
                 cacheStoreService.add(new CacheStore(url,result));
             }
 
         }
         else{
-            result = callWebService(url,HttpMethod.GET,info);
+            result = callWebService(url,httpMethod,info);
         }
 
         return result;

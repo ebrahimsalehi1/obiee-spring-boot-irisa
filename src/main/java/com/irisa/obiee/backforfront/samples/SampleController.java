@@ -1,11 +1,13 @@
 package com.irisa.obiee.backforfront.samples;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 @RestController
 public class SampleController {
@@ -42,5 +44,32 @@ public class SampleController {
                 return new ResponseEntity<>("DEFAULT, Nothing",HttpStatus.OK);
         }
     }
+
+    @RequestMapping(value="/sum", method=RequestMethod.POST)
+    public int addition(@RequestBody Map<String, Integer> param) {
+        int number1 = param.get("number1");
+        int number2 = param.get("number2");
+        return number1 + number2;
+    }
+
+//    @PostMapping(value="/approle/create",consumes = MediaType.APPLICATION_JSON_VALUE)
+//    public
+//    @ResponseBody
+//    ResponseEntity<Boolean> addRole(@RequestBody Map<String,String> role, HttpServletRequest httpServletRequest, HttpServletResponse response){
+//
+////        System.out.println("name="+role.get("name"));
+////        System.out.println("displayName="+role.get("displayName"));
+////        System.out.println("description="+role.get("description"));
+////        System.out.println("appId="+role.get("appId"));
+////        System.out.println("type="+role.get("type"));
+////        System.out.println("baseRoles="+role.get("baseRoles"));
+//
+//        System.out.println("number1="+role.get("number1"));
+//        System.out.println("number2="+role.get("number2"));
+//
+//        return new ResponseEntity<>(true, HttpStatus.OK);
+//
+//        //return new ResponseEntity<>(applicationRole.addRole(role).booleanValue(), HttpStatus.OK);
+//    }
 
 }

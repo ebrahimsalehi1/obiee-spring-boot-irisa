@@ -22,7 +22,7 @@ public class LoginServiceImpl implements LoginService {
     public String logInByWeblogicAdmin() {
         String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/SawSession/LogOn/";
 
-        Map<String,String> inputParameters = new HashMap<>();
+        Map<String,Object> inputParameters = new HashMap<>();
         inputParameters.put("userName","weblogic");
         inputParameters.put("password","APEXadmin1234");
 
@@ -34,7 +34,7 @@ public class LoginServiceImpl implements LoginService {
 
         String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/SawSession/LogOnBehalf";
 
-        Map<String,String> inputParameters = new HashMap<>();
+        Map<String,Object> inputParameters = new HashMap<>();
         inputParameters.put("userName",userName);
         inputParameters.put("adminPassword","APEXadmin1234");
         inputParameters.put("adminUserName","weblogic");

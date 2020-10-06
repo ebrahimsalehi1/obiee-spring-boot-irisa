@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     public String getAll() {
 
         String url = " http://172.25.40.135:9500/OBISEC/api/v1.0/UserMng/AllUsers?detail=true" ;
-        return generalService.callChashableService(url,null);
+        return generalService.callChashableService(url,HttpMethod.GET,null);
 
     }
 
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
     public String getByCondition(String searchKey) {
 
         String url = " http://172.25.40.135:9500/OBISEC/api/v1.0/UserMng/Search/{searchkey}?detail=true" ;
-        return generalService.callChashableService(url,null);
+        return generalService.callChashableService(url,HttpMethod.GET,null);
 
     }
 }

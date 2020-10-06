@@ -25,11 +25,11 @@ public class ReportServiceImpl implements ReportService {
 
         String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/Reports";
 
-        Map<String,String> inputParameters = new HashMap<>();
+        Map<String,Object> inputParameters = new HashMap<>();
         inputParameters.put("user",userName);
         inputParameters.put("searchWord",searchWord);
 
-        return generalService.callChashableService(url,inputParameters);
+        return generalService.callChashableService(url,HttpMethod.POST,inputParameters);
 
     }
 
@@ -39,11 +39,11 @@ public class ReportServiceImpl implements ReportService {
 
         String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/assitanceandmydashboards";
 
-        Map<String,String> inputParameters = new HashMap<>();
+        Map<String,Object> inputParameters = new HashMap<>();
         inputParameters.put("user",userName);
         inputParameters.put("searchWord",searchWord);
 
-        return generalService.callChashableService(url,inputParameters);
+        return generalService.callChashableService(url,HttpMethod.POST,inputParameters);
 
     }
 
@@ -52,11 +52,11 @@ public class ReportServiceImpl implements ReportService {
 
         String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/AnalyserProjects";
 
-        Map<String,String> inputParameters = new HashMap<>();
+        Map<String,Object> inputParameters = new HashMap<>();
         inputParameters.put("user",userName);
         inputParameters.put("searchWord",searchWord);
 
-        return generalService.callChashableService(url,inputParameters);
+        return generalService.callChashableService(url,HttpMethod.POST,inputParameters);
 
     }
 

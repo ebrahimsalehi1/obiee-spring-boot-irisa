@@ -17,7 +17,7 @@ public class ReportController {
     @Autowired
     ReportService reportService;
 
-    @PostMapping(value = "/reports/transactional",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/reports/transactional",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getReportListTransactional(@RequestBody Map<String,String> map){
 
         String userName = map.get("user");
@@ -25,7 +25,7 @@ public class ReportController {
         return new ResponseEntity<>(reportService.getReportListTransactional(userName,searchWord), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/reports/dashboard",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/reports/dashboard",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getReportListDashboard(@RequestBody Map<String,String> map){
 
         String userName = map.get("user");
@@ -33,7 +33,7 @@ public class ReportController {
         return new ResponseEntity<>(reportService.getReportListDashboard(userName,searchWord), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/reports/analyser",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/reports/analyser",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getReportListAnalyser(@RequestBody Map<String,String> map){
 
         String userName = map.get("user");
