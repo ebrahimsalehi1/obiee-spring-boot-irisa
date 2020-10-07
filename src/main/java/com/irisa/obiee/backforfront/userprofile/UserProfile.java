@@ -3,7 +3,7 @@ package com.irisa.obiee.backforfront.userprofile;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "USER_PROFILE")
+@Table(name = "FND_USER_PROFILES")
 public class UserProfile {
     @Id
     @Column(name = "DES_USER_USRPR",length = 100)

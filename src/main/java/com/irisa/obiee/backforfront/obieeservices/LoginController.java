@@ -1,26 +1,37 @@
 package com.irisa.obiee.backforfront.obieeservices;
 
+import com.irisa.obiee.backforfront.general.GeneralService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/obiee-bff",consumes = MediaType.APPLICATION_JSON_VALUE)
 public class LoginController {
 
     @Autowired
-    LoginService login;
+    GeneralService generalService;
 
     @PostMapping(value="/login")
-    public ResponseEntity<String> login(){
-        return new ResponseEntity<>(login.logInByWeblogicAdmin(), HttpStatus.OK);
+    public ResponseEntity<?> login(){
+
+        String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/SawSession/LogOn/";
+
+        return generalService.callWebService(url, HttpMethod.POST,null,false);
     }
 
-    @PostMapping(value="/login/{userName}")
-    public ResponseEntity<String> loginBehalf(@PathVariable String userName){
-        return new ResponseEntity<>(login.logInBehalf(userName), HttpStatus.OK);
+    @PostMapping(value="/loginOnBehalf")
+    public ResponseEntity<?> loginBehalf(@RequestBody Map<String,Object> map){
+
+        String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/SawSession/LogOnBehalf";
+
+        return generalService.callWebService(url,HttpMethod.POST,map,false);
     }
 
 }

@@ -7,23 +7,23 @@ import javax.persistence.*;
 public class WebService {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "WEB_SERVICE_ID")
     private Long serviceId;
 
-    @Column(name="DES_URL_WEBSR",columnDefinition = "DES_URL_WEBSR VARCHAR2(300 CHAR) NOT NULL")
+    @Column(name="DES_URL_WEBSR",nullable = false,length = 1000)
     private String url;
 
-    @Column(name="DES_SAMPLE_WEBSR",columnDefinition = "DES_SAMPLE_WEBSR CLOB NOT NULL")
+    @Column(name="DES_SAMPLE_WEBSR",nullable = false,length = 1000)
     private String sampleData;
 
-    @Column(name="LKP_TYP_WEBSR",columnDefinition = "LKP_TYP_WEBSR VARCHAR2(30 CHAR) NOT NULL")
+    @Column(name="LKP_TYP_WEBSR",nullable = false,length = 1000)
     private String typ;
 
-    @Column(name="DES_RANGE_WEBSR",columnDefinition = "DES_RANGE_WEBSR VARCHAR2(500 CHAR) NOT NULL")
+    @Column(name="DES_RANGE_WEBSR",nullable = false,length = 1000)
     private String range;
 
-    @Column(name="DES_DESCIPTION_WEBSR",columnDefinition = "DES_DESCIPTION_WEBSR CLOB NOT NULL")
+    @Column(name="DES_DESCIPTION_WEBSR",nullable = false,length = 1000)
     private String description;
 
     public WebService() {

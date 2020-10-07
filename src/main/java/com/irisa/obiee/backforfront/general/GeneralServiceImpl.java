@@ -2,17 +2,19 @@ package com.irisa.obiee.backforfront.general;
 
 import com.irisa.obiee.backforfront.cache.cachestore.CacheStore;
 import com.irisa.obiee.backforfront.cache.cachestore.CacheStoreService;
+import com.irisa.obiee.backforfront.log.logstore.LogStore;
+import com.irisa.obiee.backforfront.log.logstore.LogStoreService;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -22,47 +24,70 @@ public class GeneralServiceImpl implements GeneralService {
     @Value("${is-cashe-enable}")
     private boolean isCacheEnable;
 
+    @Value("${is-log-enable}")
+    private boolean isLogEnable;
+
     @Autowired
     CacheStoreService cacheStoreService;
 
-//    public Boolean callWebServiceGetBoolean(String url,Map<String,String> inputParameters) {
-//        RestTemplate restTemplate = new RestTemplate();
-//        return restTemplate.getForObject(url, Boolean.class);
-//
-//    }
+    @Autowired
+    LogStoreService logStoreService;
 
+    private ResponseEntity<?> callWebServiceOnly(String url, HttpMethod httpMethod, Map<String,Object> inputParameters) {
 
-    public String callWebService(String url, HttpMethod httpMethod, Map<String,Object> inputParameters) {
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<?> httpEntity = new HttpEntity<>(inputParameters,httpHeaders);
-        return restTemplate.exchange(url, httpMethod,httpEntity,String.class).getBody();
+
+        ResponseEntity exchanResponseEntity=null;
+        try {
+            exchanResponseEntity =restTemplate.exchange(url, httpMethod,httpEntity,String.class);
+        }
+        catch (HttpStatusCodeException ex){
+
+            return new ResponseEntity<>(ex.getMessage().substring(ex.getMessage().indexOf("["),ex.getMessage().length()),ex.getStatusCode());
+
+        }
+
+        return exchanResponseEntity;
     }
 
-    public String callChashableService(String url,HttpMethod httpMethod,Map<String,Object> info) {
-        String result = null;
+
+    public ResponseEntity<?> callWebService(String url,HttpMethod httpMethod,Map<String,Object> info,boolean doCache) {
+
+        String cashedValue = null;
+        ResponseEntity webServiceResponseEntity = null;
 
         JSONObject jsonObject = new JSONObject(info);
-        String keyToCache = url+"@"+httpMethod.toString()+"@"+jsonObject.toString();
+        String keyToCacheOrLog = url + "@" + httpMethod.toString() + "@" + jsonObject.toString();
 
-        if(isCacheEnable){
 
-            if(cacheStoreService.isExist(keyToCache))
-                result = cacheStoreService.getByKey(keyToCache);
-            else{
-                result = callWebService(url,httpMethod,info);
-                cacheStoreService.add(new CacheStore(keyToCache,result));
-            }
+        if(doCache) {
+            if (isCacheEnable) {
+
+
+                if (cacheStoreService.isExist(keyToCacheOrLog))
+                    webServiceResponseEntity = new ResponseEntity<>(cacheStoreService.getByKey(keyToCacheOrLog),HttpStatus.OK);
+                else {
+                    webServiceResponseEntity = callWebServiceOnly(url, httpMethod, info);
+                    cacheStoreService.add(new CacheStore(keyToCacheOrLog, webServiceResponseEntity.toString()));
+                }
+
+            } else
+                webServiceResponseEntity = callWebServiceOnly(url, httpMethod, info);
 
         }
-        else{
-            result = callWebService(url,httpMethod,info);
+        else
+            webServiceResponseEntity = callWebServiceOnly(url, httpMethod, info);
+
+        if(isLogEnable){
+            logStoreService.writeData(new LogStore(new Date(),keyToCacheOrLog,jsonObject.toString()));
         }
 
-        return result;
+        return webServiceResponseEntity;
     }
 
 }

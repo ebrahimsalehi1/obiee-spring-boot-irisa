@@ -4,11 +4,12 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "FND_LOG_STORES")
+@Table(name = "FND_LOG_STORES", schema = "obiee_crsplatform")
 public class LogStore {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "NUM_LOG_ID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FND_LOG_STORE_SEQ")
+    @SequenceGenerator(name = "FND_LOG_STORE_SEQ", sequenceName = "FND_LOG_STORE_SEQ", allocationSize = 1)
+    @Column(name = "NUM_LOG_ID",length = 15)
     private long id;
 
     @Column(name="DAT_REG_LOGST",nullable = false)

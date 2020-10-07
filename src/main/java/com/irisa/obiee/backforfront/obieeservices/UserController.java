@@ -1,6 +1,8 @@
 package com.irisa.obiee.backforfront.obieeservices;
 
+import com.irisa.obiee.backforfront.general.GeneralService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,20 +12,24 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/obiee-bff",consumes = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
 
-    @Autowired UserService userService;
-
-    //public String getAll();
-    //public String getByCondition(String seearchKey);
+    @Autowired
+    GeneralService generalService;
 
     @GetMapping(value="/allUsers")
-    public ResponseEntity<String> getAll(){
-        return new ResponseEntity<>(userService.getAll(), HttpStatus.OK);
+    public ResponseEntity<?> getAll(){
+
+        String url = " http://172.25.40.135:9500/OBISEC/api/v1.0/UserMng/AllUsers?detail=true" ;
+
+        return generalService.callWebService(url, HttpMethod.GET,null,true);
     }
 
 
     @GetMapping(value="/serachUsers/{searchCondition}")
-    public ResponseEntity<String> getByCondition(@PathVariable String searchCondition){
-        return new ResponseEntity<>(userService.getByCondition(searchCondition), HttpStatus.OK);
+    public ResponseEntity<?> getByCondition(@PathVariable String searchCondition){
+
+        String url = " http://172.25.40.135:9500/OBISEC/api/v1.0/UserMng/Search/{searchkey}?detail=true" ;
+
+        return generalService.callWebService(url,HttpMethod.GET,null,true);
     }
 
 }
