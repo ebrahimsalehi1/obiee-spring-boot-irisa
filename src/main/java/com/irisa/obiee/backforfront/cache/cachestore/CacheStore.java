@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Table(name = "FND_CACHE_STORES")
 public class CacheStore {
     @Id
-    @Column(name = "DES_KEY_USRPL",columnDefinition = "VARCHAR2(100 CHAR)")
+    @Column(name = "DES_KEY_USRPL",columnDefinition = "VARCHAR2(4000 CHAR)")
     private String key;
 
 //    @Column(name = "LKP_TYP_USRPL",columnDefinition = "VARCHAR2(30 CHAR) NOT NULL")

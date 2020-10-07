@@ -2,6 +2,7 @@ package com.irisa.obiee.backforfront.obieeservices;
 
 
 import org.json.JSONObject;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 

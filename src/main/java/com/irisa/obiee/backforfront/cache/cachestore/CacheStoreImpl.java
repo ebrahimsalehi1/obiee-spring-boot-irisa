@@ -9,35 +9,35 @@ import javax.persistence.EntityNotFoundException;
 public class CacheStoreImpl implements CacheStoreService {
 
     @Autowired
-    CacheStoreRepository userProfileRepository;
+    CacheStoreRepository cacheStoreRepository;
 
     @Override
     public String getByKey(String key) throws EntityNotFoundException {
-        CacheStore userProfile = userProfileRepository.getOne(key);
-        return userProfile.getValue();
+        CacheStore cacheStore = cacheStoreRepository.getOne(key);
+        return cacheStore.getValue();
     }
 
     @Override
-    public int add(CacheStore userProfile) {
-        userProfileRepository.save(userProfile);
+    public int add(CacheStore cacheStore) {
+        cacheStoreRepository.save(cacheStore);
         return 1;
     }
 
     @Override
-    public int delete(CacheStore userProfile) throws EntityNotFoundException {
-        userProfileRepository.delete(userProfile);
+    public int delete(CacheStore cacheStore) throws EntityNotFoundException {
+        cacheStoreRepository.delete(cacheStore);
         return 1;
     }
 
     @Override
-    public int edit(CacheStore userProfile) {
-        userProfileRepository.save(userProfile);
+    public int edit(CacheStore cacheStore) {
+        cacheStoreRepository.save(cacheStore);
         return 1;
     }
 
     @Override
     public boolean isExist(String key) {
-        return userProfileRepository.existsById(key);
+        return cacheStoreRepository.existsById(key);
     }
 
 }

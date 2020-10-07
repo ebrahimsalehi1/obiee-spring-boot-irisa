@@ -38,6 +38,11 @@ public class ApplicationRoleController {
         return new ResponseEntity<>(applicationRoleService.editRole(role).booleanValue(), HttpStatus.OK);
     }
 
+    @DeleteMapping(value="/approle/delete/{roleName}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> deleteRole(@PathVariable String roleName){
+        return new ResponseEntity<>(applicationRoleService.deleteRole(roleName).booleanValue(), HttpStatus.OK);
+    }
+
     @GetMapping(value="/approle/all",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getAll(){
         return new ResponseEntity<>(applicationRoleService.getAll(), HttpStatus.OK);
