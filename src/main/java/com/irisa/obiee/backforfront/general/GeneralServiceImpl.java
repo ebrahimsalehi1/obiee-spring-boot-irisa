@@ -33,7 +33,7 @@ public class GeneralServiceImpl implements GeneralService {
     @Autowired
     LogStoreService logStoreService;
 
-    private ResponseEntity<?> callWebServiceOnly(String url, HttpMethod httpMethod, Map<String,Object> inputParameters) {
+    private ResponseEntity<?> callWebServiceOnly(String url, HttpMethod httpMethod, String inputParameters) {
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -56,7 +56,7 @@ public class GeneralServiceImpl implements GeneralService {
     }
 
 
-    public ResponseEntity<?> callWebService(String url,HttpMethod httpMethod,Map<String,Object> info,boolean doCache) {
+    public ResponseEntity<?> callWebService(String url,HttpMethod httpMethod,String info,boolean doCache) {
 
         String cashedValue = null;
         ResponseEntity webServiceResponseEntity = null;

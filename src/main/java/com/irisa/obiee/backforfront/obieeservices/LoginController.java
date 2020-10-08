@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/obiee-bff",consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/obiee-bff")
 public class LoginController {
 
     @Autowired
@@ -27,11 +27,11 @@ public class LoginController {
     }
 
     @PostMapping(value="/loginOnBehalf")
-    public ResponseEntity<?> loginBehalf(@RequestBody Map<String,Object> map){
+    public ResponseEntity<?> loginBehalf(@RequestBody String body){
 
         String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/SawSession/LogOnBehalf";
 
-        return generalService.callWebService(url,HttpMethod.POST,map,false);
+        return generalService.callWebService(url,HttpMethod.POST,body,false);
     }
 
 }

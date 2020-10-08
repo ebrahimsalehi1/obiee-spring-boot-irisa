@@ -33,14 +33,14 @@ public class ApplicationRoleController {
     @PostMapping(value="/approle/create",produces = MediaType.APPLICATION_JSON_VALUE)
     public
     @ResponseBody
-    ResponseEntity<?> addRole(@RequestBody Map<String,Object> role){
+    ResponseEntity<?> addRole(@RequestBody String role){
         String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/ApplicationRoleMng/obi" ;
 
         return generalService.callWebService(url,HttpMethod.POST,role,false);
     }
 
     @PutMapping(value="/approle/edit",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> editRole(@RequestBody Map<String,Object> role){
+    public ResponseEntity<?> editRole(@RequestBody String role){
         String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/ApplicationRoleMng/obi" ;
 
         return generalService.callWebService(url,HttpMethod.PUT,role,false);
