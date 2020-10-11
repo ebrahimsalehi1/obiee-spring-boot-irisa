@@ -61,13 +61,18 @@ public class GeneralServiceImpl implements GeneralService {
         String cashedValue = null;
         ResponseEntity webServiceResponseEntity = null;
 
-        JSONObject jsonObject = new JSONObject(info);
-        String keyToCacheOrLog = url + "@" + httpMethod.toString() + "@" + jsonObject.toString();
+        String keyToCacheOrLog = null;
+
+        if(info != null) {
+            JSONObject jsonObject = new JSONObject(info);
+            keyToCacheOrLog = url + "@" + httpMethod.toString() + "@" + jsonObject.toString();
+        }
+        else
+            keyToCacheOrLog = url + "@" + httpMethod.toString();
 
 
         if(doCache) {
             if (isCacheEnable) {
-
 
                 if (cacheStoreService.isExist(keyToCacheOrLog))
                     webServiceResponseEntity = new ResponseEntity<>(cacheStoreService.getByKey(keyToCacheOrLog),HttpStatus.OK);
@@ -84,7 +89,7 @@ public class GeneralServiceImpl implements GeneralService {
             webServiceResponseEntity = callWebServiceOnly(url, httpMethod, info);
 
         if(isLogEnable){
-            logStoreService.writeData(new LogStore(new Date(),keyToCacheOrLog,jsonObject.toString()));
+            logStoreService.writeData(new LogStore(new Date(),keyToCacheOrLog,webServiceResponseEntity.getBody().toString()));
         }
 
         return webServiceResponseEntity;

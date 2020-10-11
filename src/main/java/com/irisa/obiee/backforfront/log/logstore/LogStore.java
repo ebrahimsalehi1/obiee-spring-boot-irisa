@@ -15,10 +15,10 @@ public class LogStore {
     @Column(name="DAT_REG_LOGST",nullable = false)
     private Date datReg;
 
-    @Column(name="DES_KEY_LOGST",nullable = false)
+    @Column(name="DES_KEY_LOGST",length = 4000,nullable = false)
     private String key;
 
-    @Column(name="DES_VAL_LOGST",nullable = false)
+    @Column(name="DES_VAL_LOGST",length = 4000,nullable = false)
     private String val;
 
     public LogStore() {

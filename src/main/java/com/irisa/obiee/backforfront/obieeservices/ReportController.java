@@ -1,6 +1,7 @@
 package com.irisa.obiee.backforfront.obieeservices;
 
 import com.irisa.obiee.backforfront.general.GeneralService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -10,17 +11,23 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/obiee-bff")
+@CrossOrigin
+@RequestMapping(value = "/obiee-bff",produces = MediaType.APPLICATION_JSON_VALUE)
 public class ReportController {
 
     @Autowired
     GeneralService generalService;
 
-    @PostMapping(value = "/reports/sample",consumes = MediaType.ALL_VALUE)
-    public ResponseEntity<?> getReportListSample(@RequestBody Map<String,Object> map){
+    @GetMapping(value = "/reports/sample")
+    public ResponseEntity<?> getReportListSample(){
 
+        return new ResponseEntity<>(new JSONObject().put("text","hello worlds!!!").toString(),HttpStatus.OK);
+    }
 
-        return new ResponseEntity<>("Hello",HttpStatus.OK);
+    @PostMapping(value = "/reports/sample2")
+    public ResponseEntity<?> getReportListSample2(@RequestBody String map){
+
+        return new ResponseEntity<>(new JSONObject().put("result2","Hello Worlds !!!").toString(),HttpStatus.OK);
     }
 
 
@@ -33,7 +40,7 @@ public class ReportController {
 
     }
 
-    @PostMapping(value = "/reports/dashboard",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/reports/dashboard")
     public ResponseEntity<?> getReportListDashboard(@RequestBody String body){
 
         String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/assitanceandmydashboards";
@@ -42,7 +49,7 @@ public class ReportController {
 
     }
 
-    @PostMapping(value = "/reports/analyser",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/reports/analyser")
     public ResponseEntity<?> getReportListAnalyser(@RequestBody String body){
 
         String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/AnalyserProjects";
