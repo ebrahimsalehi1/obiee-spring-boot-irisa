@@ -1,6 +1,8 @@
 package com.irisa.obiee.backforfront.obieeservices;
 
 import com.irisa.obiee.backforfront.general.GeneralService;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -24,7 +26,6 @@ public class UserController {
         return generalService.callWebService(url, HttpMethod.GET,null,true);
     }
 
-
     @GetMapping(value="/userMng/serachUsers/{searchCondition}")
     public ResponseEntity<?> getByCondition(@PathVariable String searchCondition){
 
@@ -39,6 +40,7 @@ public class UserController {
         String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/UserMng/"+userName ;
 
         return generalService.callWebService(url,HttpMethod.GET,null,true);
+
     }
 
 }

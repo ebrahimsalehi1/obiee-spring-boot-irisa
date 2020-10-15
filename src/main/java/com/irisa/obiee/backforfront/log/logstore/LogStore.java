@@ -18,7 +18,8 @@ public class LogStore {
     @Column(name="DES_KEY_LOGST",length = 4000,nullable = false)
     private String key;
 
-    @Column(name="DES_VAL_LOGST",length = 4000,nullable = false)
+    @Column(name="DES_VAL_LOGST",nullable = false)
+    @Lob
     private String val;
 
     public LogStore() {
