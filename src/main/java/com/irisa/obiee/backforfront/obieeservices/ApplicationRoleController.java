@@ -56,16 +56,17 @@ public class ApplicationRoleController {
 
     @GetMapping(value="/approle/all",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAll(){
-        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/ApplicationRoleMng/list/obi?detail=true" ;
+        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/ApplicationRoleMng/list/obi" ; // ?detail=true
 
         return generalService.callWebService(url,HttpMethod.GET,null,true);
     }
 
     @GetMapping(value="/approle/search/{searchword}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getByCondition(@PathVariable String searchword){
-        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/ApplicationRoleMng/search/list/obi/"+searchword+"?deatil=true&owner=AN" ;
+        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/ApplicationRoleMng/search/list/obi/"+searchword+"?owner=AN" ; //deatil=true&
 
-        return generalService.callWebService(url,HttpMethod.GET,null,true);    }
+        return generalService.callWebService(url,HttpMethod.GET,null,true);
+    }
 
     @PutMapping(value="/approle/assignUserToRole/{roleName}/{userName}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> assignUserToRole(@PathVariable String roleName,@PathVariable String userName){
@@ -84,10 +85,9 @@ public class ApplicationRoleController {
 
     @GetMapping(value="/approle/listUsersOfRole/{roleName}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getListOfUsersRole(@PathVariable String roleName){
-        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/ApplicationRoleMng/usermembers/list/obi/"+roleName+"?isDirect=true" ;
+        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/ApplicationRoleMng/usermembers/list/obi/"+roleName;//+"?isDirect=true" ;
 
         return generalService.callWebService(url,HttpMethod.GET,null,false);
     }
-
 
 }

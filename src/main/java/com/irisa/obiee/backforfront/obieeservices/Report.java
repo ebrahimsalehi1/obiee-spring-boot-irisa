@@ -8,6 +8,7 @@ public class Report {
     private Integer id;
     private String caption;
     private String description;
+    private String path;
 
     public Integer getId() {
         return id;
@@ -33,12 +34,21 @@ public class Report {
         this.description = description;
     }
 
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
     @Override
     public String toString() {
         return "Report{" +
                 "id=" + id +
                 ", caption='" + caption + '\'' +
                 ", description='" + description + '\'' +
+                ", path='" + path + '\'' +
                 '}';
     }
 }

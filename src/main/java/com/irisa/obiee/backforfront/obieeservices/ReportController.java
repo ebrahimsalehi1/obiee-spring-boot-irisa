@@ -60,7 +60,7 @@ public class ReportController {
     }
 
     @PostMapping(value = "/reports/dashboard")
-    public ResponseEntity<?> getReportListDashboard(@RequestBody String body){
+    public ResponseEntity<?> getReportListDashboard(@RequestBody String body) throws Exception{
 
         String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/assitanceandmydashboards";
 
