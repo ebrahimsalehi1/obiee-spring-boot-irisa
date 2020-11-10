@@ -78,7 +78,8 @@ public class GeneralServiceImpl implements GeneralService {
                     webServiceResponseEntity = new ResponseEntity<>(cacheStoreService.getByKey(keyToCacheOrLog),HttpStatus.OK);
                 else {
                     webServiceResponseEntity = callWebServiceOnly(url, httpMethod, info);
-                    cacheStoreService.add(new CacheStore(keyToCacheOrLog, webServiceResponseEntity.getBody().toString()));
+                    if(webServiceResponseEntity.getStatusCodeValue()==200)
+                        cacheStoreService.add(new CacheStore(keyToCacheOrLog, webServiceResponseEntity.getBody().toString()));
                 }
 
             } else

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin
 @RequestMapping(value = "/obiee-bff",produces = MediaType.APPLICATION_JSON_VALUE)
-@Transactional(timeout = 5)
+//@Transactional(timeout = 5)
 public class UserController {
 
     @Autowired
@@ -23,7 +23,7 @@ public class UserController {
     @GetMapping(value="/user/all")
     public ResponseEntity<?> getAll() throws Exception{
 
-        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/UserMng/AllUsers?detail=true" ;
+        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/UserMng/AllUsers" ;//?detail=true
 
         return generalService.callWebService(url, HttpMethod.GET,null,true);
     }

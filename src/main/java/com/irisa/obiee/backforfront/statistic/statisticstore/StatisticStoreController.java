@@ -103,14 +103,14 @@ public class StatisticStoreController {
 
     }
 
-    @PostMapping(value="/statistic/create", consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value="/statistic/create")
     public ResponseEntity<?> create(@RequestBody StatisticStore statisticStore){
 
         statisticStore.toString();
 
         try {
             statisticStoreService.save(statisticStore);
-            return new ResponseEntity<>(new JSONArray().put(true), HttpStatus.OK);
+            return new ResponseEntity<>(new JSONArray().put(true).toString(), HttpStatus.OK);
         }
         catch (Exception exception){
             return new ResponseEntity<>(new JSONArray().put(false), HttpStatus.EXPECTATION_FAILED);

@@ -47,15 +47,10 @@ public class ReportController {
         String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/Reports";
 
         ResponseEntity res = generalService.callWebService(url, HttpMethod.POST,body,true);
+        return res;
 
-        Report[] reports = new Gson().fromJson(res.getBody().toString(), Report[].class);
-
-        return new ResponseEntity<>(new Gson().toJson(reportService.changeReports(Arrays.asList(reports))).toString(),HttpStatus.OK);
-
-//        return new ResponseEntity<>(new JSONArray().put(new JSONObject()
-//                .put("id",1)
-//                .put("caption","ebrahim")
-//                .put("description","Ebrahim Salehi")).toString(),HttpStatus.OK);
+        //Report[] reports = new Gson().fromJson(res.getBody().toString(), Report[].class);
+        //return new ResponseEntity<>(new Gson().toJson(reportService.changeReports(Arrays.asList(reports))).toString(),HttpStatus.OK);
 
     }
 
@@ -67,10 +62,10 @@ public class ReportController {
 //        return generalService.callWebService(url,HttpMethod.POST,body,true);
 
         ResponseEntity res = generalService.callWebService(url, HttpMethod.POST,body,true);
+        return res;
 
-        Report[] reports = new Gson().fromJson(res.getBody().toString(), Report[].class);
-
-        return new ResponseEntity<>(new Gson().toJson(reportService.changeReports(Arrays.asList(reports))).toString(),HttpStatus.OK);
+        //Report[] reports = new Gson().fromJson(res.getBody().toString(), Report[].class);
+        //return new ResponseEntity<>(new Gson().toJson(reportService.changeReports(Arrays.asList(reports))).toString(),HttpStatus.OK);
 
     }
 
@@ -82,10 +77,10 @@ public class ReportController {
 //        return generalService.callWebService(url,HttpMethod.POST,body,true);
 
         ResponseEntity res = generalService.callWebService(url, HttpMethod.POST,body,true);
+        return res;
 
-        Report[] reports = new Gson().fromJson(res.getBody().toString(), Report[].class);
-
-        return new ResponseEntity<>(new Gson().toJson(reportService.changeReports(Arrays.asList(reports))).toString(),HttpStatus.OK);
+        //Report[] reports = new Gson().fromJson(res.getBody().toString(), Report[].class);
+        //return new ResponseEntity<>(new Gson().toJson(reportService.changeReports(Arrays.asList(reports))).toString(),HttpStatus.OK);
 
     }
 

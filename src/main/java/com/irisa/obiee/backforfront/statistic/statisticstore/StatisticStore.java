@@ -30,7 +30,7 @@ public class StatisticStore {
     @Column(name="NAM_APPROLES_SCSTR",length = 4000)
     private String appRole;
 
-    @Column(name="TOT_COUNT_SCSTR",length = 4000)
+    @Column(name="TOT_COUNT_SCSTR")
     private Integer count;
 
     public StatisticStore() {
