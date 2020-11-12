@@ -90,4 +90,21 @@ public class ApplicationRoleController {
         return generalService.callWebService(url,HttpMethod.GET,null,false);
     }
 
+    @PutMapping(value="/approle/assigeroletorole/{parenroleName}/{childRoleName}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> assigeRoleToRole(@PathVariable String parenroleName,@PathVariable String childRoleName){
+
+        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/ApplicationRoleMng/assigeroletorole/obi/"+parenroleName+"/"+childRoleName ;
+
+        return generalService.callWebService(url,HttpMethod.PUT,null,false);
+    }
+
+    @PutMapping(value="/approle/removerolefromrole/{roleName}/{userName}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> removeRoleFromRole(@PathVariable String parenroleName,@PathVariable String childRoleName){
+
+        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/ApplicationRoleMng/removerolefromrole/obi/"+parenroleName+"/"+childRoleName ;
+
+        return generalService.callWebService(url,HttpMethod.PUT,null,false);
+    }
+
+
 }
