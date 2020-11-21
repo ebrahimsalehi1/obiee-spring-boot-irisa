@@ -12,10 +12,7 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @CrossOrigin
@@ -36,6 +33,12 @@ public class ReportController {
 
     @PostMapping(value = "/reports/sample2")
     public ResponseEntity<?> getReportListSample2(@RequestBody String map){
+
+        JSONObject jsonObject = new JSONObject((map));
+        Date dat1 = new Date(jsonObject.getLong("dat1"));
+        Date dat2 = new Date(jsonObject.getLong("dat2"));
+
+        System.out.println(dat1.toString()+"/"+dat2.toString());
 
         return new ResponseEntity<>(new JSONObject().put("result2","Hello Worlds !!!").toString(),HttpStatus.OK);
     }
@@ -83,5 +86,6 @@ public class ReportController {
         //return new ResponseEntity<>(new Gson().toJson(reportService.changeReports(Arrays.asList(reports))).toString(),HttpStatus.OK);
 
     }
+
 
 }
