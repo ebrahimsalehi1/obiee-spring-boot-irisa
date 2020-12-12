@@ -90,7 +90,7 @@ public class GeneralServiceImpl implements GeneralService {
             webServiceResponseEntity = callWebServiceOnly(url, httpMethod, info);
 
         if(isLogEnable){
-            logStoreService.writeData(new LogStore(new Date(),keyToCacheOrLog,webServiceResponseEntity.getBody().toString()));
+            logStoreService.writeData(new LogStore(new Date(),keyToCacheOrLog,webServiceResponseEntity.getBody()!=null ? webServiceResponseEntity.getBody().toString():"null"));
         }
 
         return webServiceResponseEntity;

@@ -70,7 +70,7 @@ public class ApplicationRoleController {
 
     @PutMapping(value="/approle/assignUserToRole/{roleName}/{userName}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> assignUserToRole(@PathVariable String roleName,@PathVariable String userName){
-        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/ApplicationRoleMng/assigeroletouser/obi/"+roleName+"/"+userName ;
+        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/ApplicationRoleMng/assignroletouser/obi/"+roleName+"/"+userName ;
 
         return generalService.callWebService(url,HttpMethod.PUT,null,false);
     }
@@ -90,10 +90,10 @@ public class ApplicationRoleController {
         return generalService.callWebService(url,HttpMethod.GET,null,false);
     }
 
-    @PutMapping(value="/approle/assigeroletorole/{parenroleName}/{childRoleName}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value="/approle/assignroletorole/{parenroleName}/{childRoleName}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> assigeRoleToRole(@PathVariable String parenroleName,@PathVariable String childRoleName){
 
-        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/ApplicationRoleMng/assigeroletorole/obi/"+parenroleName+"/"+childRoleName ;
+        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/ApplicationRoleMng/assignroletorole/obi/"+parenroleName+"/"+childRoleName ;
 
         return generalService.callWebService(url,HttpMethod.PUT,null,false);
     }
@@ -106,5 +106,34 @@ public class ApplicationRoleController {
         return generalService.callWebService(url,HttpMethod.PUT,null,false);
     }
 
+    @PutMapping(value="/approle/assignroletogroup",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> assignRoleToGroup(@RequestBody String body){
+
+        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/ApplicationRoleMng/assignroletogroup";
+
+        return generalService.callWebService(url,HttpMethod.PUT,body,false);
+    }
+
+    @PutMapping(value="/approle/removerolefromgroup",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> RemoveRoleFromGroup(@RequestBody String body){
+
+        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/ApplicationRoleMng/removerolefromgroup";
+
+        return generalService.callWebService(url,HttpMethod.PUT,body,false);
+    }
+
+    @GetMapping(value="/approle/groupmembers/{roleName}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> groupMembers(@PathVariable String roleName){
+        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/ApplicationRoleMng/groupmembers/list/obi/"+roleName;
+
+        return generalService.callWebService(url,HttpMethod.GET,null,true);
+    }
+
+    @GetMapping(value="/approle/rolemembers/{roleName}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> roleMembers(@PathVariable String roleName){
+        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/ApplicationRoleMng/rolemembers/list/obi/"+roleName;
+
+        return generalService.callWebService(url,HttpMethod.GET,null,true);
+    }
 
 }

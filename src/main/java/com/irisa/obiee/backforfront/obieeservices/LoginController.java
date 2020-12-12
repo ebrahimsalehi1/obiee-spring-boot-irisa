@@ -20,13 +20,13 @@ public class LoginController {
     GeneralService generalService;
 
     @PostMapping(value="/login")
-    public ResponseEntity<?> login(){
+    public ResponseEntity<?> login(@RequestBody String body){
 
         String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/SawSession/LogOn/";
-        String body = "{\n" +
-                "    \"userName\":\"weblogic\",\n" +
-                "    \"password\":\"APEXadmin1234\"\n" +
-                "}";
+//        String body = "{\n" +
+//                "    \"userName\":\"weblogic\",\n" +
+//                "    \"password\":\"APEXadmin1234\"\n" +
+//                "}";
 
         return generalService.callWebService(url, HttpMethod.POST,body,false);
     }

@@ -19,27 +19,21 @@ public class CatalogController {
     @PostMapping(value="/tree")
     public ResponseEntity<?> tree(@RequestBody String body) throws Exception{
 
+        //JSONObject jsonObject = new JSONObject(body);
+        //String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/tree?detail="+jsonObject.getBoolean("detail");
         String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/tree";
 
         ResponseEntity res = generalService.callWebService(url, HttpMethod.POST,body,true);
         return res;
     }
 
-    @PostMapping(value="/itemPermission")
-    public ResponseEntity<?> itemPermission(@RequestBody String body) throws Exception{
-
-        String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/itemPermission";
-
-        ResponseEntity res = generalService.callWebService(url, HttpMethod.POST,body,true);
-        return res;
-    }
 
     @PutMapping(value="/addModifyPermission")
     public ResponseEntity<?> addModifyPermission(@RequestBody String body) throws Exception{
 
         String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/addModifyPermission";
 
-        ResponseEntity res = generalService.callWebService(url, HttpMethod.PUT,body,true);
+        ResponseEntity res = generalService.callWebService(url, HttpMethod.PUT,body,false);
         return res;
     }
 
@@ -48,7 +42,7 @@ public class CatalogController {
 
         String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/addOpenPermission";
 
-        ResponseEntity res = generalService.callWebService(url, HttpMethod.PUT,body,true);
+        ResponseEntity res = generalService.callWebService(url, HttpMethod.PUT,body,false);
         return res;
     }
 
@@ -57,7 +51,7 @@ public class CatalogController {
 
         String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/addRunReportPermission";
 
-        ResponseEntity res = generalService.callWebService(url, HttpMethod.PUT,body,true);
+        ResponseEntity res = generalService.callWebService(url, HttpMethod.PUT,body,false);
         return res;
     }
 
@@ -66,7 +60,7 @@ public class CatalogController {
 
         String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/addFullPermission";
 
-        ResponseEntity res = generalService.callWebService(url, HttpMethod.PUT,body,true);
+        ResponseEntity res = generalService.callWebService(url, HttpMethod.PUT,body,false);
         return res;
     }
 
@@ -75,7 +69,7 @@ public class CatalogController {
 
         String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/addViewReportOutputPermission";
 
-        ResponseEntity res = generalService.callWebService(url, HttpMethod.PUT,body,true);
+        ResponseEntity res = generalService.callWebService(url, HttpMethod.PUT,body,false);
         return res;
     }
 
@@ -84,7 +78,7 @@ public class CatalogController {
 
         String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/addNoAccessPermission";
 
-        ResponseEntity res = generalService.callWebService(url, HttpMethod.PUT,body,true);
+        ResponseEntity res = generalService.callWebService(url, HttpMethod.PUT,body,false);
         return res;
     }
 
@@ -93,7 +87,7 @@ public class CatalogController {
 
         String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/addScheduleReportPermission";
 
-        ResponseEntity res = generalService.callWebService(url, HttpMethod.PUT,body,true);
+        ResponseEntity res = generalService.callWebService(url, HttpMethod.PUT,body,false);
         return res;
     }
 
@@ -102,7 +96,25 @@ public class CatalogController {
 
         String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/addPermission";
 
-        ResponseEntity res = generalService.callWebService(url, HttpMethod.PUT,body,true);
+        ResponseEntity res = generalService.callWebService(url, HttpMethod.PUT,body,false);
+        return res;
+    }
+
+    @DeleteMapping(value="/deletePermission")
+    public ResponseEntity<?> deleteCustomPermission(@RequestBody String body) throws Exception{
+
+        String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/deletePermission";
+
+        ResponseEntity res = generalService.callWebService(url, HttpMethod.PUT,body,false);
+        return res;
+    }
+
+    @PostMapping(value="/rolePermission")
+    public ResponseEntity<?> rolePermission(@RequestBody String body) throws Exception{
+
+        String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/rolePermissions";
+
+        ResponseEntity res = generalService.callWebService(url, HttpMethod.POST,body,true);
         return res;
     }
 
