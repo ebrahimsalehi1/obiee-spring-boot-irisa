@@ -22,7 +22,7 @@ public class LoginController {
     @PostMapping(value="/login")
     public ResponseEntity<?> login(@RequestBody String body){
 
-        String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/SawSession/LogOn/";
+        String url = "/OBISRV/api/v1.0/SawSession/LogOn/";
 //        String body = "{\n" +
 //                "    \"userName\":\"weblogic\",\n" +
 //                "    \"password\":\"APEXadmin1234\"\n" +
@@ -34,9 +34,17 @@ public class LoginController {
     @PostMapping(value="/loginOnBehalf")
     public ResponseEntity<?> loginBehalf(@RequestBody String body){
 
-        String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/SawSession/LogOnBehalf";
+        String url = "/OBISRV/api/v1.0/SawSession/LogOnBehalf";
 
         return generalService.callWebService(url,HttpMethod.POST,body,false);
+    }
+
+    @GetMapping(value="/isSessionValid")
+    public ResponseEntity<?> isSessionValid(@RequestBody String body){
+
+        String url = "/OBISRV/api/v1.0/SawSession/isSessionValid";
+
+        return generalService.callWebService(url, HttpMethod.GET,body,false);
     }
 
 }

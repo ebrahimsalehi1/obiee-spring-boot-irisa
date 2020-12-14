@@ -47,7 +47,7 @@ public class ReportController {
     @PostMapping(value = "/reports/transactional")
     public ResponseEntity<?> getReportListTransactional(@RequestBody String body){
 
-        String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/Reports";
+        String url = "/OBISRV/api/v1.0/CatalogMng/Reports";
 
         ResponseEntity res = generalService.callWebService(url, HttpMethod.POST,body,true);
         return res;
@@ -60,7 +60,7 @@ public class ReportController {
     @PostMapping(value = "/reports/dashboard")
     public ResponseEntity<?> getReportListDashboard(@RequestBody String body) throws Exception{
 
-        String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/assitanceandmydashboards";
+        String url = "/OBISRV/api/v1.0/CatalogMng/assitanceandmydashboards";
 
 //        return generalService.callWebService(url,HttpMethod.POST,body,true);
 
@@ -75,7 +75,7 @@ public class ReportController {
     @PostMapping(value = "/reports/analyser")
     public ResponseEntity<?> getReportListAnalyser(@RequestBody String body){
 
-        String url = "http://172.25.40.135:9500/OBISRV/api/v1.0/CatalogMng/AnalyserProjects";
+        String url = "/OBISRV/api/v1.0/CatalogMng/AnalyserProjects";
 
 //        return generalService.callWebService(url,HttpMethod.POST,body,true);
 

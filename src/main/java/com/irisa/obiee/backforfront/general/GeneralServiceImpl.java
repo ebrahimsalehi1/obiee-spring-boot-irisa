@@ -27,6 +27,9 @@ public class GeneralServiceImpl implements GeneralService {
     @Value("${is-log-enable}")
     private boolean isLogEnable;
 
+    @Value("${preUrl}")
+    private String preUrl;
+
     @Autowired
     CacheStoreService cacheStoreService;
 
@@ -60,37 +63,46 @@ public class GeneralServiceImpl implements GeneralService {
 
         String cashedValue = null;
         ResponseEntity webServiceResponseEntity = null;
+        String mainUrl = preUrl+url;
 
         String keyToCacheOrLog = null;
 
-        if(info != null) {
-            JSONObject jsonObject = new JSONObject(info);
-            keyToCacheOrLog = url + "@" + httpMethod.toString() + "@" + jsonObject.toString();
-        }
-        else
-            keyToCacheOrLog = url + "@" + httpMethod.toString();
+        try {
+            if (info != null) {
+                JSONObject jsonObject = new JSONObject(info);
+                keyToCacheOrLog = mainUrl + "@" + httpMethod.toString() + "@" + jsonObject.toString();
+            } else
+                keyToCacheOrLog = mainUrl + "@" + httpMethod.toString();
 
 
-        if(doCache) {
-            if (isCacheEnable) {
+            if (doCache) {
+                if (isCacheEnable) {
 
-                if (cacheStoreService.isExist(keyToCacheOrLog))
-                    webServiceResponseEntity = new ResponseEntity<>(cacheStoreService.getByKey(keyToCacheOrLog),HttpStatus.OK);
-                else {
-                    webServiceResponseEntity = callWebServiceOnly(url, httpMethod, info);
-                    if(webServiceResponseEntity.getStatusCodeValue()==200)
-                        cacheStoreService.add(new CacheStore(keyToCacheOrLog, webServiceResponseEntity.getBody().toString()));
-                }
+                    if (cacheStoreService.isExist(keyToCacheOrLog))
+                        webServiceResponseEntity = new ResponseEntity<>(cacheStoreService.getByKey(keyToCacheOrLog), HttpStatus.OK);
+                    else {
+                        webServiceResponseEntity = callWebServiceOnly(mainUrl, httpMethod, info);
+                        if (webServiceResponseEntity.getStatusCodeValue() == 200)
+                            cacheStoreService.add(new CacheStore(keyToCacheOrLog, webServiceResponseEntity.getBody().toString()));
+                    }
+
+                } else
+                    webServiceResponseEntity = callWebServiceOnly(mainUrl, httpMethod, info);
 
             } else
-                webServiceResponseEntity = callWebServiceOnly(url, httpMethod, info);
+                webServiceResponseEntity = callWebServiceOnly(mainUrl, httpMethod, info);
 
+            if (isLogEnable) {
+                logStoreService.writeData(new LogStore(new Date(), keyToCacheOrLog, webServiceResponseEntity.getBody() != null ? webServiceResponseEntity.getBody().toString() : "null"));
+            }
         }
-        else
-            webServiceResponseEntity = callWebServiceOnly(url, httpMethod, info);
-
-        if(isLogEnable){
-            logStoreService.writeData(new LogStore(new Date(),keyToCacheOrLog,webServiceResponseEntity.getBody()!=null ? webServiceResponseEntity.getBody().toString():"null"));
+        catch(Exception ex){
+            webServiceResponseEntity = new ResponseEntity<>(
+                    new JSONObject()
+                            .put("errorPersian","")
+                            .put("errorLatin","")
+                            .put("errorMessage",ex.getMessage()).toString()
+                    ,HttpStatus.EXPECTATION_FAILED);
         }
 
         return webServiceResponseEntity;

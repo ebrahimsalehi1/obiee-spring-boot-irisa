@@ -23,7 +23,7 @@ public class UserController {
     @GetMapping(value="/user/all")
     public ResponseEntity<?> getAll() throws Exception{
 
-        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/UserMng/AllUsers" ;//?detail=true
+        String url = "/OBISEC/api/v1.0/UserMng/AllUsers" ;//?detail=true
 
         return generalService.callWebService(url, HttpMethod.GET,null,true);
     }
@@ -31,7 +31,7 @@ public class UserController {
     @GetMapping(value="/user/serach/{searchCondition}")
     public ResponseEntity<?> getByCondition(@PathVariable String searchCondition){
 
-        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/UserMng/Search/"+searchCondition+"?detail=true" ;
+        String url = "/OBISEC/api/v1.0/UserMng/Search/"+searchCondition+"?detail=true" ;
 
         return generalService.callWebService(url,HttpMethod.GET,null,true);
     }
@@ -39,7 +39,7 @@ public class UserController {
     @GetMapping(value="/user/info/{userName}")
     public ResponseEntity<?> getUserInfo(@PathVariable String userName){
 
-        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/UserMng/"+userName ;
+        String url = "/OBISEC/api/v1.0/UserMng/"+userName ;
 
         return generalService.callWebService(url,HttpMethod.GET,null,true);
 
@@ -48,7 +48,7 @@ public class UserController {
     @GetMapping(value="/user/usersofgroup/{groupName}")
     public ResponseEntity<?> getAllUsersMemberOfGroup(@PathVariable String groupName){
 
-        String url = "http://172.25.40.135:9500/OBISEC/api/v1.0/UserMng/AllUsersMemberOfGroup/"+groupName ;
+        String url = "/OBISEC/api/v1.0/UserMng/AllUsersMemberOfGroup/"+groupName ;
 
         return generalService.callWebService(url,HttpMethod.GET,null,true);
 
