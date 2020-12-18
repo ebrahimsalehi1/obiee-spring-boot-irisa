@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 @RestController
 @CrossOrigin
@@ -39,12 +40,14 @@ public class LoginController {
         return generalService.callWebService(url,HttpMethod.POST,body,false);
     }
 
-    @GetMapping(value="/isSessionValid")
+    @PostMapping(value="/isSessionValid")
     public ResponseEntity<?> isSessionValid(@RequestBody String body){
 
         String url = "/OBISRV/api/v1.0/SawSession/isSessionValid";
 
-        return generalService.callWebService(url, HttpMethod.GET,body,false);
+        return generalService.callWebService(url, HttpMethod.POST,body,false);
+        //Random random = new Random();
+        //return new ResponseEntity<Boolean>(random.nextInt()%2==0 ? true:false,HttpStatus.OK);
     }
 
 }
