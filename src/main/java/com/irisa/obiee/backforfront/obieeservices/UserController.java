@@ -1,5 +1,6 @@
 package com.irisa.obiee.backforfront.obieeservices;
 
+import com.google.gson.Gson;
 import com.irisa.obiee.backforfront.general.GeneralService;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,7 +26,11 @@ public class UserController {
 
         String url = "/OBISEC/api/v1.0/UserMng/AllUsers" ;//?detail=true
 
-        return generalService.callWebService(url, HttpMethod.GET,null,true);
+        ResponseEntity<?> res = generalService.callWebService(url, HttpMethod.GET,null,true);
+        User[] users = new Gson().fromJson(res.getBody().toString(), User[].class);
+        return new ResponseEntity<>(new Gson().toJson(users).toString(),HttpStatus.OK);
+
+        //return generalService.callWebService(url, HttpMethod.GET,null,true);
     }
 
     @GetMapping(value="/user/serach/{searchCondition}")
